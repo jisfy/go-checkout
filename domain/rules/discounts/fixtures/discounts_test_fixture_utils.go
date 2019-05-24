@@ -10,18 +10,19 @@ const (
 	CabifyTshirtBarcode        = 1111
 	CabifyMugBarcode           = 1112
 	CheapTshirtBarcode         = 1113
+	CabifyVoucherBarcode       = 1114
 	CabifyMugPriceCentsEuro    = 200
 	CabifyTshirtPriceCentsEuro = 200
 	CheapTshirtPriceCentsEuro  = 100
+	TShirtPrice                = 2000
+	VoucherPrice               = 500
+	MugPrice                   = 750
 )
 
 var (
-	cabifyTShirt order.Item =
-		order.Item{CabifyTshirtBarcode, "Cabify TShirt", *money.New(CabifyTshirtPriceCentsEuro, EuroCurrencyCode), order.TShirt}
-	cabifyMug order.Item =
-		order.Item{CabifyMugBarcode, "Cabify Mug", *money.New(CabifyMugPriceCentsEuro, EuroCurrencyCode), order.Mug}
-	cheapTShirt order.Item =
-		order.Item{CheapTshirtBarcode, "Cheap Tshirt", *money.New(CheapTshirtPriceCentsEuro, EuroCurrencyCode), order.TShirt}
+	cabifyTShirt order.Item = order.Item{CabifyTshirtBarcode, "Cabify TShirt", *money.New(CabifyTshirtPriceCentsEuro, EuroCurrencyCode), order.TShirt}
+	cabifyMug    order.Item = order.Item{CabifyMugBarcode, "Cabify Mug", *money.New(CabifyMugPriceCentsEuro, EuroCurrencyCode), order.Mug}
+	cheapTShirt  order.Item = order.Item{CheapTshirtBarcode, "Cheap Tshirt", *money.New(CheapTshirtPriceCentsEuro, EuroCurrencyCode), order.TShirt}
 )
 
 func NewOrderItems(numberOfTShirts, numberOfMugs uint) order.OrderItems {
@@ -37,4 +38,16 @@ func NewOrderItems(numberOfTShirts, numberOfMugs uint) order.OrderItems {
 		orderItems = append(orderItems, mugOrderItem)
 	}
 	return order.OrderItems{orderItems}
+}
+
+func NewTShirt() order.Item {
+	return order.Item{CabifyTshirtBarcode, "Cabify TShirt", *money.New(TShirtPrice, EuroCurrencyCode), order.TShirt}
+}
+
+func NewMug() order.Item {
+	return order.Item{CabifyMugBarcode, "Cabify Mug", *money.New(MugPrice, EuroCurrencyCode), order.Mug}
+}
+
+func NewVoucher() order.Item {
+	return order.Item{CabifyVoucherBarcode, "Cabify Voucher", *money.New(VoucherPrice, EuroCurrencyCode), order.Voucher}
 }

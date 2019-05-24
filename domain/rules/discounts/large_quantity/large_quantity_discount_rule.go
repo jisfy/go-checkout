@@ -7,13 +7,13 @@ import (
 
 const (
 	DefaultDiscountPercentage = 0
-	LargeQuantityDiscountId = "000000_LARGE_QUANTITY"
+	LargeQuantityDiscountId   = "000000_LARGE_QUANTITY"
 )
 
 type LargeQuantityDiscountRule struct {
 	NumberOfItemsWithCodeThreshold uint
-	DiscountPercentage uint
-	ItemCode order.ItemCode
+	DiscountPercentage             uint
+	ItemCode                       order.ItemCode
 }
 
 func totalDiscountedPriceOfItems(effectiveDiscountPercentage uint,

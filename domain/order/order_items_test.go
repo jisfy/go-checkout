@@ -6,19 +6,19 @@ import (
 )
 
 const (
-	euroCurrencySymbol = "EUR"
-	cabifyTshirtBarcode = 1111
-	cabifyMugBarcode = 1112
-	cheapTshirtBarcode = 1113
-	cabifyMugPriceCentsEuro = 200
+	euroCurrencySymbol         = "EUR"
+	cabifyTshirtBarcode        = 1111
+	cabifyMugBarcode           = 1112
+	cheapTshirtBarcode         = 1113
+	cabifyMugPriceCentsEuro    = 200
 	cabifyTshirtPriceCentsEuro = 200
-	cheapTshirtPriceCentsEuro = 100
+	cheapTshirtPriceCentsEuro  = 100
 )
 
 var (
 	cabifyTShirt Item = Item{cabifyTshirtBarcode, "Cabify TShirt", *money.New(cabifyTshirtPriceCentsEuro, euroCurrencySymbol), TShirt}
-	cabifyMug Item = Item{cabifyMugBarcode, "Cabify Mug", *money.New(cabifyMugPriceCentsEuro, euroCurrencySymbol), Mug}
-	cheapTShirt Item = Item{cheapTshirtBarcode, "Cheap Tshirt", *money.New(cheapTshirtPriceCentsEuro, euroCurrencySymbol), TShirt}
+	cabifyMug    Item = Item{cabifyMugBarcode, "Cabify Mug", *money.New(cabifyMugPriceCentsEuro, euroCurrencySymbol), Mug}
+	cheapTShirt  Item = Item{cheapTshirtBarcode, "Cheap Tshirt", *money.New(cheapTshirtPriceCentsEuro, euroCurrencySymbol), TShirt}
 )
 
 func TestOrderItems_NumberOfItemsWithCode(t *testing.T) {
@@ -43,8 +43,8 @@ func TestOrderItems_NumberOfItemsWithCode(t *testing.T) {
 }
 
 func newOrderItems(numberOfTShirts, numberOfMugs uint) OrderItems {
-	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts }
-	mugOrderItem := OrderItem{cabifyMug, numberOfMugs }
+	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts}
+	mugOrderItem := OrderItem{cabifyMug, numberOfMugs}
 	return OrderItems{[]OrderItem{tshirtOrderItem, mugOrderItem}}
 }
 
@@ -53,7 +53,7 @@ func TestOrderItems_NumberOfItemsWithCode_Empty(t *testing.T) {
 
 	itemsWithCode := orderItems.NumberOfItemsWithCode(Voucher)
 	if itemsWithCode != 0 {
-		t.Errorf("Unexpected number of Items with Code expected %d, found %d",0, itemsWithCode)
+		t.Errorf("Unexpected number of Items with Code expected %d, found %d", 0, itemsWithCode)
 	}
 }
 
@@ -64,8 +64,8 @@ func TestOrderItems_TotalPriceOfItems(t *testing.T) {
 		itemCode ItemCode
 		expected money.Money
 	}{
-		{TShirt,*money.New(400, euroCurrencySymbol)},
-		{Voucher,*money.New(0, euroCurrencySymbol)},
+		{TShirt, *money.New(400, euroCurrencySymbol)},
+		{Voucher, *money.New(0, euroCurrencySymbol)},
 	}
 	orderItems := newOrderItems(numberOfTShirts, numberOfMugs)
 
@@ -83,15 +83,15 @@ func TestOrderItems_TotalPriceOfItems_Empty(t *testing.T) {
 
 	totalPriceOfItems := orderItems.TotalPriceOfItemsByCode(Voucher)
 	if !totalPriceOfItems.IsZero() {
-		t.Errorf("Unexpected total Price of Items, expected %d found %d",0, totalPriceOfItems.Amount())
+		t.Errorf("Unexpected total Price of Items, expected %d found %d", 0, totalPriceOfItems.Amount())
 	}
 }
 
 func TestOrderItems_MinPriceOfItems(t *testing.T) {
 	const numberOfTShirts = 2
 
-	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts }
-	cheaperTShirtOrderItem := OrderItem{cheapTShirt, numberOfTShirts }
+	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts}
+	cheaperTShirtOrderItem := OrderItem{cheapTShirt, numberOfTShirts}
 	orderItems := OrderItems{[]OrderItem{tshirtOrderItem, cheaperTShirtOrderItem}}
 
 	minPriceOfItems, _ := orderItems.MinPriceOfItems(TShirt)
@@ -103,8 +103,8 @@ func TestOrderItems_MinPriceOfItems(t *testing.T) {
 func TestOrderItems_MinPriceOfItems_Error(t *testing.T) {
 	const numberOfTShirts = 2
 
-	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts }
-	cheaperTShirtOrderItem := OrderItem{cheapTShirt, numberOfTShirts }
+	tshirtOrderItem := OrderItem{cabifyTShirt, numberOfTShirts}
+	cheaperTShirtOrderItem := OrderItem{cheapTShirt, numberOfTShirts}
 	orderItems := OrderItems{[]OrderItem{tshirtOrderItem, cheaperTShirtOrderItem}}
 
 	_, error := orderItems.MinPriceOfItems(Voucher)

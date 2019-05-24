@@ -11,6 +11,6 @@ func (orderItem OrderItem) totalPrice() *money.Money {
 	return orderItem.Item.Price.Multiply(int64(orderItem.Quantity))
 }
 
-
-
-
+func (orderItem *OrderItem) IncrementQuantity(quantity uint) {
+	orderItem.Quantity += quantity
+}

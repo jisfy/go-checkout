@@ -3,7 +3,7 @@ package order
 import "github.com/Rhymond/go-money"
 
 type Discount struct {
-	Id string
+	Id     string
 	Amount money.Money
 }
 

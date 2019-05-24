@@ -13,7 +13,7 @@ func New(rules []order.DiscountRule) *SimplePricingRules {
 	return &SimplePricingRules{rules}
 }
 
-func (pricingRules SimplePricingRules) price(orderItems order.OrderItems) (totalDiscountedPrice *money.Money, err error) {
+func (pricingRules SimplePricingRules) Price(orderItems order.OrderItems) (totalDiscountedPrice *money.Money, err error) {
 	discounts := []order.Discount{}
 	for _, pricingRule := range pricingRules.rules {
 		discount := pricingRule.Discount(orderItems)
@@ -36,5 +36,3 @@ func applyDiscounts(discounts []order.Discount, totalPrice *money.Money) (discou
 	}
 	return
 }
-
-

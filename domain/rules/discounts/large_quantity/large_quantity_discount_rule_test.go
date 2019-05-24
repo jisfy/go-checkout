@@ -3,8 +3,8 @@ package large_quantity
 import (
 	"github.com/Rhymond/go-money"
 	"github.com/jisfy/go-checkout/domain/order"
-	"testing"
 	"github.com/jisfy/go-checkout/domain/rules/discounts/fixtures"
+	"testing"
 )
 
 func TestLargeQuantityDiscountRule_EffectiveDiscountPercentage_WhenThresholdOvercome(t *testing.T) {
@@ -13,8 +13,8 @@ func TestLargeQuantityDiscountRule_EffectiveDiscountPercentage_WhenThresholdOver
 	discountRule := &LargeQuantityDiscountRule{2, largeQuantityDiscountPercentage, order.Voucher}
 	effectiveDiscountPercentage := discountRule.effectiveDiscountPercentage(4)
 	if effectiveDiscountPercentage != expectedEffectiveDiscountPercentage {
-			t.Errorf("unexpected effective discountRule percentage. Expected %d, found %d",
-				expectedEffectiveDiscountPercentage, effectiveDiscountPercentage)
+		t.Errorf("unexpected effective discountRule percentage. Expected %d, found %d",
+			expectedEffectiveDiscountPercentage, effectiveDiscountPercentage)
 	}
 }
 

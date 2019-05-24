@@ -13,8 +13,8 @@ const (
 
 type TakeMItemsPayNWithCodeDiscountRule struct {
 	NumberOfItemsToTake uint
-	NumberOfItemsToPay uint
-	ItemCode order.ItemCode
+	NumberOfItemsToPay  uint
+	ItemCode            order.ItemCode
 }
 
 func New(numberOfItemsToTake uint, numberOfItemsToPay uint, itemCode order.ItemCode) (*TakeMItemsPayNWithCodeDiscountRule, error) {
@@ -35,7 +35,7 @@ func (discountRule TakeMItemsPayNWithCodeDiscountRule) Discount(orderItems order
 }
 
 func (discountRule TakeMItemsPayNWithCodeDiscountRule) totalPriceOfFreeItems(
-		orderItems order.OrderItems, numberOfFreeItems uint) (totalPrice *money.Money, err error) {
+	orderItems order.OrderItems, numberOfFreeItems uint) (totalPrice *money.Money, err error) {
 	minItemPrice, err := orderItems.MinPriceOfItems(discountRule.ItemCode)
 	if err == nil {
 		totalPrice = minItemPrice.Multiply(int64(numberOfFreeItems))

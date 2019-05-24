@@ -27,9 +27,9 @@ func TestTakeMItemsPayNWithCodeDiscountRule_New_ValidItemsToPay(t *testing.T) {
 
 func TestTakeMItemsPayNWithCodeDiscountRule_TotalNumberOfFreeItems(t *testing.T) {
 	testData := []struct {
-		itemsToPay uint
-		itemstoTake uint
-		itemsWithCode uint
+		itemsToPay        uint
+		itemstoTake       uint
+		itemsWithCode     uint
 		expectedFreeItems uint
 	}{{2, 3, 4, 1}, {2, 3, 6, 2}, {2, 3, 2, 0}}
 
@@ -45,12 +45,12 @@ func TestTakeMItemsPayNWithCodeDiscountRule_TotalNumberOfFreeItems(t *testing.T)
 
 func TestTakeMItemsPayNWithCodeDiscountRule_TotalPriceOfFreeItems(t *testing.T) {
 	testData := []struct {
-		itemsToPay uint
-		itemstoTake uint
-		numberOfFreeItems uint
-		numberOfItemsOfType uint
+		itemsToPay             uint
+		itemstoTake            uint
+		numberOfFreeItems      uint
+		numberOfItemsOfType    uint
 		expectedFreeItemsPrice *money.Money
-		expectsError bool
+		expectsError           bool
 	}{
 		{2, 3, 1, 4, money.New(200, fixtures.EuroCurrencyCode), false},
 		{2, 3, 2, 6, money.New(400, fixtures.EuroCurrencyCode), false},
@@ -100,11 +100,11 @@ func TestTakeMItemsPayNWithCodeDiscountRule_Discount(t *testing.T) {
 
 func TestTakeMItemsPayNWithCodeDiscountRule_Discount_None(t *testing.T) {
 	testData := []struct {
-		itemsToPay uint
-		itemstoTake uint
+		itemsToPay          uint
+		itemstoTake         uint
 		numberOfItemsOfType uint
-		itemCode order.ItemCode
-		expectedDiscount *order.Discount
+		itemCode            order.ItemCode
+		expectedDiscount    *order.Discount
 	}{
 		{2, 3, 2, order.TShirt, nil},
 		{2, 3, 2, order.Voucher, nil},

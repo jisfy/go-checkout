@@ -6,8 +6,8 @@ type ItemCode int
 
 const (
 	Voucher = 0
-	TShirt = 1
-	Mug = 2
+	TShirt  = 1
+	Mug     = 2
 )
 
 type Item struct {

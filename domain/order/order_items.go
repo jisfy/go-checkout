@@ -8,7 +8,6 @@ import (
 
 const defaultCurrencyCode = "EUR"
 
-
 type OrderItems struct {
 	Items []OrderItem
 }
@@ -37,10 +36,10 @@ func (orderItems OrderItems) MinPriceOfItems(itemCode ItemCode) (minItemPrice *m
 	for _, orderItem := range orderItems.Items {
 		if orderItem.Item.Code == itemCode {
 			if minItemPrice == nil {
-				minItemPrice = &orderItem.Item.Price
+				minItemPrice = money.New(orderItem.Item.Price.Amount(), orderItem.Item.Price.Currency().Code)
 			}
 			if orderItemPricesIsSmaller, _ := orderItem.Item.Price.LessThan(minItemPrice); orderItemPricesIsSmaller {
-				minItemPrice = &orderItem.Item.Price
+				minItemPrice = money.New(orderItem.Item.Price.Amount(), orderItem.Item.Price.Currency().Code)
 			}
 		}
 	}
